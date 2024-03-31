@@ -17,7 +17,7 @@ async def handler(websocket):
         print(f"Received message from client: {message}")
 
         SYMBOL = "^NSEI" # any symbol from yahoo finance
-        data = yf.download(SYMBOL,period ="100d",interval = "1d")
+        data = yf.download(SYMBOL,period ="10d",interval = "1d")
         data = data.to_json()
         # print(type(data))
         

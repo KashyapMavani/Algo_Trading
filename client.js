@@ -22,16 +22,16 @@ ws.onopen = function() {
 };
 
 
-ws.onmessage = function(event) {
-    let message = event.data;
-    message = JSON.parse(message)
+ws.onmessage = async function(event) {
+    let message = await event.data;
+    message = await JSON.parse(message)
     Data = message
 };
 
 setTimeout(
 
     ()=>{
-        const {Open, Close, High, Low} =  Data;
+        const {Open, Close, High, Low} = Data;
         
         for (const key in Open) {
             const value = Open[key];
@@ -53,10 +53,12 @@ setTimeout(
             LowValues.push(value);
           }
 
-        const ndays = 15;
-        const smaSeries = calculateSMA(CloseValues, ndays);
-        console.log(smaSeries);
-        // console.log(calculateEMA);
+        const ndaysSMA = 15;
+        const ndaysEMA = 5;
+        const smaSeries = calculateSMA(CloseValues, ndaysSMA);
+        const emaSeries = calculateEMA(CloseValues, ndaysEMA);
+        // console.log(smaSeries);
+        // console.log(emaSeries);
         
         // console.log(OpenValues);
         // console.log(CloseValues);
