@@ -57,13 +57,13 @@ setTimeout(
         const ndaysEMA = 5;
         const smaSeries = calculateSMA(CloseValues, ndaysSMA);
         const emaSeries = calculateEMA(CloseValues, ndaysEMA);
-        // console.log(smaSeries);
-        // console.log(emaSeries);
+        console.log(smaSeries);
+        console.log(emaSeries);
         
-        // console.log(OpenValues);
-        // console.log(CloseValues);
-        // console.log(HighValues);
-        // console.log(LowValues);
+        console.log(OpenValues);
+        console.log(CloseValues);
+        console.log(HighValues);
+        console.log(LowValues);
     }
     ,1500)
 
