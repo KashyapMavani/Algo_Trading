@@ -5,7 +5,12 @@ const ema = require('exponential-moving-average');
 
 function calculateEMA(data, ndaysEMA) {
 
-    let emaValues = ema(data,ndaysEMA)
+  let emaValues = []; 
+  let EMAValues = ema(data,ndaysEMA);
+  
+  for(let value in EMAValues){
+      emaValues.push(Number(EMAValues[value]))
+  }
     return emaValues;
   }
 
