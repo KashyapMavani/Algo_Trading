@@ -1,9 +1,8 @@
 const WebSocket = require('ws');
-const { calculateSMA } = require('./SMA');
-const { calculateEMA } = require('./EMA');
-// const { calculateEMA } = require('./exp');
-const { TimeStampCoverter } = require('./TimeStampConverter');
-const { SMA_EMA_Algo } = require('./SMA_EMA_Algo')
+const { calculateSMA } = require('./utilities/SMA');
+const { calculateEMA } = require('./utilities/EMA');
+const { TimeStampCoverter } = require('./utilities/TimeStampConverter');
+const { SMA_EMA_Algo } = require('./utilities/SMA_EMA_Algo')
  
 let Data;
 let OpenData;
@@ -74,13 +73,6 @@ setTimeout(
         const smaSeries = calculateSMA(CloseValues, ndaysSMA);
         const emaSeries = calculateEMA(CloseValues, ndaysEMA);
         SMA_EMA_Algo(smaSeries,emaSeries,TimeStamp);
-        // console.log(smaSeries);
-        // console.log(emaSeries);
-        // console.log(TimeStamp);
-        // console.log(OpenValues);
-        // console.log(CloseValues);
-        // console.log(HighValues);
-        // console.log(LowValues);
     }
     ,3000)
 
