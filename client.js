@@ -1,19 +1,7 @@
 const WebSocket = require('ws');
-const { calculateSMA } = require('./utilities/SMA');
-const { calculateEMA } = require('./utilities/EMA');
-const { TimeStampCoverter } = require('./utilities/TimeStampConverter');
-const { SMA_EMA_Algo } = require('./utilities/SMA_EMA_Algo')
+const { processDataAndRunAlgo } = require('./utilities/ProcessData')
  
 let Data;
-let OpenData;
-let CloseData;
-let HighData;
-let LowData;
-const OpenValues = [];
-const CloseValues = [];
-const HighValues = [];
-const LowValues = [];
-const TimeStamp =[];
 
 
 const ws = new WebSocket("ws://localhost:3000/"); // Replace with your server URL and port
@@ -30,51 +18,8 @@ ws.onmessage = async function(event) {
     message = await JSON.parse(message)
     Data = message
     // console.log(Data);
+    await processDataAndRunAlgo(Data)
 };
-
-setTimeout(
-
-    ()=>{
-
-        const {Open, Close, High, Low} = Data; // destructuring Data object
-
-//------- storing TimeStamp values in array----------------------------------------------
-        for (const key in Open) {
-            const value = TimeStampCoverter(key);
-            TimeStamp.push(value);
-          }
-//------- storing Open values in array----------------------------------------------
-        
-        for (const key in Open) {
-            const value = Open[key];
-            OpenValues.push(value);
-          }
-//------- storing Close values in array----------------------------------------------
-        
-        for (const key in Close) {
-            const value = Close[key];
-            CloseValues.push(value);
-          }
-//------- storing High values in array----------------------------------------------
-        
-        for (const key in High) {
-            const value = High[key];
-            HighValues.push(value);
-        }
-//------- storing Low values in array----------------------------------------------
-
-        for (const key in Low) {
-            const value = Low[key];
-            LowValues.push(value);
-          }
-
-        const ndaysSMA = 15;
-        const ndaysEMA = 5;
-        const smaSeries = calculateSMA(CloseValues, ndaysSMA);
-        const emaSeries = calculateEMA(CloseValues, ndaysEMA);
-        SMA_EMA_Algo(smaSeries,emaSeries,TimeStamp);
-    }
-    ,3000)
 
 // ws.onerror = function(error) {
 //     console.error("WebSocket error:", error);
