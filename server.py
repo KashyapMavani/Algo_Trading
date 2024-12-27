@@ -11,7 +11,7 @@ async def handler(websocket):
 
         SYMBOL = "^NSEI" # any symbol from yahoo finance "^NSEI","^NSEBANK","BTC-USD"
         while True:
-            data = yf.download(SYMBOL,period ="2d",interval = "5m")
+            data = yf.download(SYMBOL,period ="500d",interval = "1d")
             print(data)
             data = data.to_json()
         

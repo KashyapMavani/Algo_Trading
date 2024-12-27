@@ -19,8 +19,10 @@
     "nodemon": "^3.0.3",
     "technicalindicators": "^3.1.0",
     "trading-signals": "^5.0.4",
+    "tulind": "^0.8.20",
     "websocket": "^1.0.34",
     "ws": "^8.16.0",
+    "yahoo-finance2": "^2.13.3",
     "yfinance": "^0.0.6"
   }
 }
